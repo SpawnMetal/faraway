@@ -1,26 +1,40 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
     "module": "esnext",
+    "target": "es2017",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": false,
+    "jsx": "react",
+    "allowJs": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "paths": {
+      "@root/*": ["*"]
+    },
+    "noEmit": false,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["build-plugin/*.ts", "client/**/*.ts", "server/**/*.ts"],
+  "exclude": ["dist**/*"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    },
+    "require": ["tsconfig-paths/register"]
+  }
+  // "files": ["globals.d.ts"]
 }

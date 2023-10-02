@@ -13,21 +13,15 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "typescript": "^4.9.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "npx ts-node build/bin client/build.config.ts --serve",
+    "build": "npx ts-node build/bin client/build.config.ts",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
+  "author": "Pavel Kushkov <spawnmetal666@gmail.com>",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -39,5 +33,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@anatine/esbuild-decorators": "^0.2.19",
+    "esbuild": "^0.15.5",
+    "esbuild-envfile-plugin": "^1.0.5",
+    "ts-node": "^10.9.1"
   }
 }
