@@ -1,5 +1,8 @@
-import React from 'react'
+import {getSw} from '@api'
+import React, {useEffect} from 'react'
 
 export function App() {
-  return <div>Worked!</div>
+  // useEffect(() => {getSw()}, [])
+
+  return <div onClick={getSw}>Worked!</div>
 }
