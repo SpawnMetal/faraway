@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import {EventEmitter} from 'node:stream'
 import esbuildEnvPlugin from 'esbuild-envfile-plugin'
-import {esbuildDecorators} from '@anatine/esbuild-decorators'
+// import {esbuildDecorators} from '@anatine/esbuild-decorators'
 import {build, BuildOptions, BuildResult, WatchMode} from 'esbuild'
 import {HTMLPlugin} from './plugins/HTMLPlugin'
 import {BuilderOptions} from './build.option'
@@ -26,7 +26,7 @@ export default (async () => {
   if (projectType === 'front-end') {
     options = {
       ...options,
-      entryPoints: [pathFromRootDir('client', applicationName, 'main.tsx')],
+      entryPoints: [pathFromRootDir('client', applicationName, 'components', 'main', 'main.tsx')],
       entryNames: '[dir]/bundle.[hash]',
       sourcemap: true,
       metafile: true,

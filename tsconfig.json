@@ -22,13 +22,14 @@
     "allowJs": true,
     "isolatedModules": true,
     "paths": {
-      "@root/*": ["*"]
+      "@root/*": ["*"],
+      "@components": ["client/components"]
     },
     "noEmit": false,
     "resolveJsonModule": true,
     "esModuleInterop": true
   },
-  "include": ["build-plugin/*.ts", "client/**/*.ts", "server/**/*.ts"],
+  "include": ["build-plugin/*.ts", "client/**/*.ts", "server/**/*.ts", "client/**/*.tsx", "server/**/*.tsx", "client/**/*.js", "server/**/*.js", "client/**/*.jsx", "server/**/*.jsx"],
   "exclude": ["dist**/*"],
   "ts-node": {
     "compilerOptions": {
