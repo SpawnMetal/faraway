@@ -1,4 +1,5 @@
 import {makeAutoObservable} from 'mobx'
+import {IPeople, Resource} from 'swapi-ts'
 
 type RequestStatuses = 'loading' | 'success' | 'error' | null
 
@@ -8,6 +9,10 @@ class Sw {
   requestStatusSuccess: RequestStatuses = 'success' // Статус получения данных с сервера - успех
   requestStatusError: RequestStatuses = 'error' // Статус получения данных с сервера - ошибка
   requestStatus: RequestStatuses = null // Статус получения данных с сервера
+  peoples: {
+    resources: Resource<IPeople>[]
+    populateAll(path: string): Promise<any>
+  }
 
   constructor() {
     makeAutoObservable(this)
@@ -44,5 +49,4 @@ class Sw {
   }
 }
 
-const sw = new Sw()
-export default sw
+export const sw = new Sw()
