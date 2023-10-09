@@ -2,32 +2,23 @@ import React, {useEffect} from 'react'
 import {observer} from 'mobx-react-lite'
 import {getSw} from '@api'
 import {sw} from '@stores'
-import {Home} from '@components'
+import {Backdrop, ErrorPage, Home} from '@components'
+import {ErrorBoundary} from '@components'
 
 export const App = observer(() => {
   useEffect(() => {
-    sw.setRequestStatusLoading()
+    sw.setRequestStatusLoading('people')
     getSw()
-      .then(() => sw.setRequestStatusSuccess())
-      .catch(() => {
-        sw.setRequestStatusError()
-      })
+      .then(() => sw.setRequestStatusSuccess('people'))
+      .catch(() => sw.setRequestStatusError('people'))
   }, [])
 
-  return sw.isRequestStatusSuccess && <Home />
+  if (sw.isRequestStatusError('people')) return <ErrorPage />
 
-  // return (
-  //   <div
-  //     onClick={() => {
-  //       sw.setRequestStatusLoading()
-  //       getSw()
-  //         .then(() => sw.setRequestStatusSuccess())
-  //         .catch(() => {
-  //           sw.setRequestStatusError()
-  //         })
-  //     }}
-  //   >
-  //     Worked!
-  //   </div>
-  // )
+  return (
+    <ErrorBoundary>
+      {sw.isRequestStatusSuccess('people') && <Home />}
+      {<Backdrop open={sw.isRequestStatusLoading('people')} />}
+    </ErrorBoundary>
+  )
 })

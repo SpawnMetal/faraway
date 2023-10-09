@@ -3,49 +3,62 @@ import {IPeople, Resource} from 'swapi-ts'
 
 type RequestStatuses = 'loading' | 'success' | 'error' | null
 
+export type PathTypes = 'people' | 'films' | 'homeworld' | 'species' | 'starships' | 'vehicles'
+
+interface RequestStatusInterface extends Record<PathTypes, RequestStatuses> {}
+
 // Основное состояние приложения
 class Sw {
   requestStatusLoading: RequestStatuses = 'loading' // Статус получения данных с сервера - загрузка
   requestStatusSuccess: RequestStatuses = 'success' // Статус получения данных с сервера - успех
   requestStatusError: RequestStatuses = 'error' // Статус получения данных с сервера - ошибка
-  requestStatus: RequestStatuses = null // Статус получения данных с сервера
+  populateStatus: RequestStatusInterface = {
+    // Статус получения данных с сервера
+    people: null,
+    films: null,
+    homeworld: null,
+    species: null,
+    starships: null,
+    vehicles: null,
+  }
   peoples: {
     resources: Resource<IPeople>[]
     populateAll(path: string): Promise<any>
   }
+  value: IPeople
 
   constructor() {
     makeAutoObservable(this)
   }
 
   // Устанавливает статус получения данных с сервера - загрузка
-  setRequestStatusLoading() {
-    this.requestStatus = this.requestStatusLoading
+  setRequestStatusLoading(path: PathTypes) {
+    this.populateStatus[path] = this.requestStatusLoading
   }
 
   // Устанавливает статус получения данных с сервера - успех
-  setRequestStatusSuccess() {
-    this.requestStatus = this.requestStatusSuccess
+  setRequestStatusSuccess(path: PathTypes) {
+    this.populateStatus[path] = this.requestStatusSuccess
   }
 
   // Устанавливает статус получения данных с сервера - ошибка
-  setRequestStatusError() {
-    this.requestStatus = this.requestStatusError
+  setRequestStatusError(path: PathTypes) {
+    this.populateStatus[path] = this.requestStatusError
   }
 
   // Получает результат загрузки данных с сервера - загрузка
-  get isRequestStatusLoading() {
-    return this.requestStatus === this.requestStatusLoading
+  isRequestStatusLoading(path: PathTypes) {
+    return this.populateStatus[path] === this.requestStatusLoading
   }
 
   // Получает результат загрузки данных с сервера - успех
-  get isRequestStatusSuccess() {
-    return this.requestStatus === this.requestStatusSuccess
+  isRequestStatusSuccess(path: PathTypes) {
+    return this.populateStatus[path] === this.requestStatusSuccess
   }
 
   // Получает результат загрузки данных с сервера - ошибка
-  get isRequestStatusError() {
-    return this.requestStatus === this.requestStatusError
+  isRequestStatusError(path: PathTypes) {
+    return this.populateStatus[path] === this.requestStatusError
   }
 }
 

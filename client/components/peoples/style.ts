@@ -8,3 +8,14 @@ export const title: SxProps = {
     display: 'flex',
   },
 }
+
+export const img: SxProps = {
+  overflow: 'hidden',
+  img: {
+    display: 'block',
+    transition: '.5s',
+  },
+  'img:hover': {
+    transform: 'scale(1.2)',
+  },
+}

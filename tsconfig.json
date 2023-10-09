@@ -25,6 +25,7 @@
       "@components": ["client/components"],
       "@api": ["client/api"],
       "@stores": ["client/stores"],
+      "@models": ["client/models"],
       "@root/*": ["*"]
     },
     "noEmit": false,
