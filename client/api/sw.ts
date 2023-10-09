@@ -9,6 +9,7 @@ export const getSw = async () => {
 }
 
 export const populate = async (path: PathTypes, index: number) => {
+  sw.setRequestStatusLoading(path)
   return sw.peoples.resources[index]
     .populate(path)
     .then(() => sw.setRequestStatusSuccess(path))
