@@ -19,6 +19,11 @@ export const PeopleInfo = observer((props: Props) => {
   const speciesStatusSuccess = sw.isRequestStatusSuccess('species')
   const starshipsStatusSuccess = sw.isRequestStatusSuccess('starships')
   const vehiclesStatusSuccess = sw.isRequestStatusSuccess('vehicles')
+  const homeworldStatusError = sw.isRequestStatusError('homeworld')
+  const filmsStatusError = sw.isRequestStatusError('films')
+  const speciesStatusError = sw.isRequestStatusError('species')
+  const starshipsStatusError = sw.isRequestStatusError('starships')
+  const vehiclesStatusError = sw.isRequestStatusError('vehicles')
 
   useEffect(() => {
     switch (parameter) {
@@ -83,6 +88,36 @@ export const PeopleInfo = observer((props: Props) => {
         break
     }
   }, [homeworldStatusSuccess, filmsStatusSuccess, speciesStatusSuccess, starshipsStatusSuccess, vehiclesStatusSuccess])
+
+  useEffect(() => {
+    switch (parameter) {
+      case 'homeworld':
+        if (!homeworldStatusError) break
+        setLoading(false)
+        setValue('Failed to load data, try again later')
+        break
+      case 'films':
+        if (!filmsStatusError) break
+        setLoading(false)
+        setValue('Failed to load data, try again later')
+        break
+      case 'species':
+        if (!speciesStatusError) break
+        setLoading(false)
+        setValue('Failed to load data, try again later')
+        break
+      case 'starships':
+        if (!starshipsStatusError) break
+        setLoading(false)
+        setValue('Failed to load data, try again later')
+        break
+      case 'vehicles':
+        if (!vehiclesStatusError) break
+        setLoading(false)
+        setValue('Failed to load data, try again later')
+        break
+    }
+  }, [homeworldStatusError, filmsStatusError, speciesStatusError, starshipsStatusError, vehiclesStatusError])
 
   return (
     <>
