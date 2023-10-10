@@ -36,6 +36,7 @@ export default (async () => {
         '.png': 'file',
         '.svg': 'file',
         '.jpg': 'file',
+        '.jpeg': 'file',
         '.xlsx': 'file',
       },
     }

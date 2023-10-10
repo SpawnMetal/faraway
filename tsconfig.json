@@ -39,6 +39,6 @@
       "module": "CommonJS"
     },
     "require": ["tsconfig-paths/register"]
-  }
-  // "files": ["globals.d.ts"]
+  },
+  "files": ["globals.d.ts"]
 }

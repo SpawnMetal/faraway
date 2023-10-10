@@ -4,6 +4,7 @@ import {Dialog, DialogContent, DialogTitle, Grid, IconButton} from '@mui/materia
 import CloseIcon from '@mui/icons-material/Close'
 import {sw} from '@stores'
 import {PeopleInfo} from '../peopleInfo/PeopleInfo'
+import * as style from './style'
 
 interface Props {
   open: boolean
@@ -18,16 +19,7 @@ export const PeopleDialog = observer((props: Props) => {
   return (
     <Dialog open={open} onClose={handleClose} fullWidth={true}>
       <DialogTitle>{`Details about ${sw.value.name}`}</DialogTitle>
-      <IconButton
-        aria-label="close"
-        onClick={handleClose}
-        sx={{
-          position: 'absolute',
-          right: 8,
-          top: 8,
-          color: theme => theme.palette.grey[500],
-        }}
-      >
+      <IconButton aria-label="close" onClick={handleClose} sx={style.close}>
         <CloseIcon />
       </IconButton>
       <DialogContent>
