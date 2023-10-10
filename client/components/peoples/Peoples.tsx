@@ -6,7 +6,6 @@ import {sw} from '@stores'
 import {PeopleDialog} from '@components'
 import {IPeople} from 'swapi-ts'
 import {populateAll} from '@api'
-import {peoleImg} from '@models'
 
 export const Peoples = observer(() => {
   const [open, setOpen] = React.useState(false)
@@ -24,7 +23,7 @@ export const Peoples = observer(() => {
   const peoplesMemo = useMemo(() => {
     return sw.peoples.resources.map(({value}, index) => (
       <ImageListItem key={`img_${value.name}`} sx={style.img} onClick={() => handleClickOpen(value, index)}>
-        <img src={peoleImg[value.name].img} alt={value.name} loading="lazy" />
+        <img src={`/peoples/${value.name}.jpeg?w=248&fit=crop&auto=format`} alt={value.name} loading="lazy" />
         <ImageListItemBar sx={style.title} title={value.name} />
       </ImageListItem>
     ))

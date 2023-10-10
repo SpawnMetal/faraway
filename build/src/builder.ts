@@ -8,6 +8,7 @@ import {HTMLPlugin} from './plugins/HTMLPlugin'
 import {BuilderOptions} from './build.option'
 import {initializeStaticServer} from './dev-server'
 import {CleanPlugin} from './plugins/cleanPlugin'
+import copyStaticFiles from 'esbuild-copy-static-files'
 
 export default (async () => {
   const configPath = pathFromRootDir(process.argv[2])
@@ -31,7 +32,7 @@ export default (async () => {
       sourcemap: true,
       metafile: true,
       platform: 'browser',
-      plugins: [CleanPlugin, esbuildEnvPlugin],
+      plugins: [CleanPlugin, esbuildEnvPlugin, copyStaticFiles({src: './public', dest: `./dist/${projectType}/${pathName}`})],
       loader: {
         '.png': 'file',
         '.svg': 'file',
