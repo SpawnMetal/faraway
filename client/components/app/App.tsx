@@ -17,6 +17,7 @@ export const App = observer(() => {
 
   return (
     <ErrorBoundary>
+      <link rel="icon" href="/favicon.ico" />
       {sw.isRequestStatusSuccess('people') && <Home />}
       {<Backdrop open={sw.isRequestStatusLoading('people')} />}
     </ErrorBoundary>
