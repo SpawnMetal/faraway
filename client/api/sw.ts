@@ -1,8 +1,10 @@
 import * as SWApi from 'swapi-ts'
 import {PathTypes, sw} from '@stores'
 
-export const getSw = async () => {
-  return SWApi.People.find().then(result => {
+export const getSw = async (searchString?: string) => {
+  const method = searchString ? () => SWApi.People.findBySearch([searchString]) : SWApi.People.find
+
+  return method().then(result => {
     sw.peoples = result
     sw.peoples.resources.sort((a, b) => a.value.name.localeCompare(b.value.name))
   })

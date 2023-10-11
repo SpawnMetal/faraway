@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react'
+import React, {useState, useMemo} from 'react'
 import {ImageList, ImageListItem, ImageListItemBar} from '@mui/material'
 import {observer} from 'mobx-react-lite'
 import * as style from './style'
@@ -8,7 +8,7 @@ import {IPeople} from 'swapi-ts'
 import {populateAll} from '@api'
 
 export const Peoples = observer(() => {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
 
   const handleClickOpen = (value: IPeople, index: number) => {
     sw.value = value
