@@ -27,3 +27,12 @@ export const close: SxProps<Theme> = {
   top: 8,
   color: theme => theme.palette.grey[500],
 }
+
+export const edit: SxProps<Theme> = {
+  ml: 2,
+  color: theme => theme.palette.grey[500],
+}
+
+export const save: SxProps<Theme> = {
+  ...edit,
+}

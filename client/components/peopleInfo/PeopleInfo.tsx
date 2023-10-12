@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {observer} from 'mobx-react-lite'
-import {CircularProgress, Grid, Typography} from '@mui/material'
+import {CircularProgress, Grid, TextField, Typography} from '@mui/material'
 import {peopleModel} from '@models'
 import {IPeople} from 'swapi-ts'
 import {sw} from '@stores'
@@ -8,10 +8,11 @@ import * as style from './style'
 
 interface Props {
   parameter: keyof IPeople
+  editMode: boolean
 }
 
 export const PeopleInfo = observer((props: Props) => {
-  const {parameter} = props
+  const {parameter, editMode} = props
   const [loading, setLoading] = useState(false)
   const [value, setValue] = useState(String(sw.value[parameter]))
   const homeworldStatusSuccess = sw.isRequestStatusSuccess('homeworld')
@@ -125,7 +126,13 @@ export const PeopleInfo = observer((props: Props) => {
         <Typography sx={style.title}>{peopleModel[parameter].title}</Typography>
       </Grid>
       <Grid item xs={9}>
-        {loading ? <CircularProgress size={20} /> : <Typography>{value}</Typography>}
+        {loading ? (
+          <CircularProgress size={20} />
+        ) : editMode && peopleModel[parameter].edit !== false ? (
+          <TextField id="standard-basic" defaultValue={value} fullWidth variant="standard" />
+        ) : (
+          <Typography>{value}</Typography>
+        )}
       </Grid>
     </>
   )

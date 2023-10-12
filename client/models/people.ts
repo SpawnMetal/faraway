@@ -10,7 +10,6 @@ interface PeopleModelInterface extends Record<keyof IPeople, PeopleInterface> {}
 export const peopleModel: PeopleModelInterface = {
   name: {
     title: 'Name',
-    edit: true,
   },
   birth_year: {
     title: 'Birth year',
@@ -53,8 +52,10 @@ export const peopleModel: PeopleModelInterface = {
   },
   created: {
     title: 'Created',
+    edit: false,
   },
   edited: {
     title: 'Edited',
+    edit: false,
   },
 }
