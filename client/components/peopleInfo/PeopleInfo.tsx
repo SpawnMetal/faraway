@@ -71,19 +71,19 @@ export const PeopleInfo = observer((props: Props) => {
       case 'species':
         if (!speciesStatusSuccess) break
         setLoading(false)
-        if (!sw.value[parameter]?.length) setValue('-')
+        if (!sw.value[parameter]?.length) setValue('unknown')
         else setValue(sw.value[parameter].map(item => item['name']).join(', '))
         break
       case 'starships':
         if (!starshipsStatusSuccess) break
         setLoading(false)
-        if (!sw.value[parameter]?.length) setValue('-')
+        if (!sw.value[parameter]?.length) setValue('unknown')
         else setValue(sw.value[parameter].map(item => item['name']).join(', '))
         break
       case 'vehicles':
         if (!vehiclesStatusSuccess) break
         setLoading(false)
-        if (!sw.value[parameter]?.length) setValue('-')
+        if (!sw.value[parameter]?.length) setValue('unknown')
         else setValue(sw.value[parameter].map(item => item['name']).join(', '))
         break
     }

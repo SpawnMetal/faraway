@@ -12,8 +12,8 @@ class Sw {
   requestStatusLoading: RequestStatuses = 'loading' // Статус получения данных с сервера - загрузка
   requestStatusSuccess: RequestStatuses = 'success' // Статус получения данных с сервера - успех
   requestStatusError: RequestStatuses = 'error' // Статус получения данных с сервера - ошибка
+  // Статус получения данных с сервера
   populateStatus: RequestStatusInterface = {
-    // Статус получения данных с сервера
     app: null,
     people: null,
     films: null,
