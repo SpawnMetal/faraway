@@ -7,10 +7,17 @@ import {ErrorBoundary} from '@components'
 
 export const App = observer(() => {
   useEffect(() => {
+    sw.setRequestStatusLoading('app')
     sw.setRequestStatusLoading('people')
     getSw()
-      .then(() => sw.setRequestStatusSuccess('people'))
-      .catch(() => sw.setRequestStatusError('people'))
+      .then(() => {
+        sw.setRequestStatusSuccess('people')
+        sw.setRequestStatusSuccess('app')
+      })
+      .catch(() => {
+        sw.setRequestStatusError('people')
+        sw.setRequestStatusError('app')
+      })
   }, [])
 
   if (sw.isRequestStatusError('people')) return <ErrorPage />
@@ -18,7 +25,7 @@ export const App = observer(() => {
   return (
     <ErrorBoundary>
       <link rel="icon" href="/favicon.ico" />
-      {sw.isRequestStatusSuccess('people') && <Home />}
+      {sw.isRequestStatusSuccess('app') && <Home />}
       {<Backdrop open={sw.isRequestStatusLoading('people')} />}
     </ErrorBoundary>
   )

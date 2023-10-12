@@ -1,5 +1,5 @@
 import React, {useState, useMemo} from 'react'
-import {ImageList, ImageListItem, ImageListItemBar} from '@mui/material'
+import {ImageList, ImageListItem, ImageListItemBar, Typography} from '@mui/material'
 import {observer} from 'mobx-react-lite'
 import * as style from './style'
 import {sw} from '@stores'
@@ -29,7 +29,11 @@ export const Peoples = observer(() => {
     ))
   }, [sw.peoples])
 
-  return (
+  return peoplesMemo.length === 0 ? (
+    <Typography sx={style.textEmptySearchResult} variant="h6">
+      По Вашему запросу ничего не найдено!
+    </Typography>
+  ) : (
     <>
       <ImageList sx={style.imageList} cols={4} gap={0}>
         {peoplesMemo}

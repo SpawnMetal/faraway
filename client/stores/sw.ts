@@ -3,7 +3,7 @@ import {IPeople, Resource} from 'swapi-ts'
 
 type RequestStatuses = 'loading' | 'success' | 'error' | null
 
-export type PathTypes = 'people' | 'films' | 'homeworld' | 'species' | 'starships' | 'vehicles'
+export type PathTypes = 'app' | 'people' | 'films' | 'homeworld' | 'species' | 'starships' | 'vehicles'
 
 interface RequestStatusInterface extends Record<PathTypes, RequestStatuses> {}
 
@@ -14,6 +14,7 @@ class Sw {
   requestStatusError: RequestStatuses = 'error' // Статус получения данных с сервера - ошибка
   populateStatus: RequestStatusInterface = {
     // Статус получения данных с сервера
+    app: null,
     people: null,
     films: null,
     homeworld: null,

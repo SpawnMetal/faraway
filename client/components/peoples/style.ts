@@ -19,3 +19,9 @@ export const img: SxProps = {
     transform: 'scale(1.2)',
   },
 }
+
+export const textEmptySearchResult: SxProps = {
+  pt: 9,
+  pl: 3,
+  color: '#fff',
+}
