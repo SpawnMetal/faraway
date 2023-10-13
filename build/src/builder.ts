@@ -32,7 +32,7 @@ export default (async () => {
       sourcemap: true,
       metafile: true,
       platform: 'browser',
-      plugins: [CleanPlugin, esbuildEnvPlugin, copyStaticFiles({src: './public', dest: `./dist/${projectType}/${pathName}`})],
+      plugins: [CleanPlugin, esbuildEnvPlugin, copyStaticFiles({src: pathFromRootDir('public'), dest: pathFromRootDir('dist', `${projectType}`, `${pathName}`)})],
       loader: {
         '.png': 'file',
         '.svg': 'file',

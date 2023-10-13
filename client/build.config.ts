@@ -3,6 +3,6 @@ export default {
   applicationName: '',
   pathName: 'faraway',
   projectType: 'front-end',
-  webPageTittle: 'Faraway',
+  webPageTittle: 'Faraway SWAPI',
   servePort: 3000,
 } as BuilderOptions
