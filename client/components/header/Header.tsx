@@ -33,7 +33,7 @@ export const Header = observer(() => {
               sx={style.styledInputBase}
               placeholder="Search…"
               inputProps={{'aria-label': 'search'}}
-              onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => e.target instanceof HTMLInputElement && e.key === 'Enter' && handleOnKeyUp(e.target.value)}
+              onKeyUp={(event: React.KeyboardEvent<HTMLInputElement>) => event.target instanceof HTMLInputElement && event.key === 'Enter' && handleOnKeyUp(event.target.value)}
             />
           </Box>
         </Toolbar>

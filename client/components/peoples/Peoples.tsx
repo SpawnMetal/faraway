@@ -12,6 +12,7 @@ export const Peoples = observer(() => {
 
   const handleClickOpen = (value: IPeople, index: number) => {
     sw.value = value
+    sw.newValue = {}
     populateAll(index)
     setOpen(true)
   }

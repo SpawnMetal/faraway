@@ -27,6 +27,7 @@ class Sw {
     populateAll(path: string): Promise<any>
   }
   value: IPeople
+  newValue: Partial<IPeople>
 
   constructor() {
     makeAutoObservable(this)
@@ -60,6 +61,12 @@ class Sw {
   // Получает результат загрузки данных с сервера - ошибка
   isRequestStatusError(path: PathTypes) {
     return this.populateStatus[path] === this.requestStatusError
+  }
+
+  // Обновляет значения на новые
+  updateValue() {
+    for (const key in this.newValue) if (!this.newValue[key].length) this.newValue[key] = 'unknown'
+    this.value = {...this.value, ...this.newValue}
   }
 }
 

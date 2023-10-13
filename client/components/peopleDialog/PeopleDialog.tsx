@@ -24,6 +24,7 @@ export const PeopleDialog = observer((props: Props) => {
   }
   const handleSaveClick = () => {
     setEditMode(false)
+    sw.updateValue()
   }
 
   return (

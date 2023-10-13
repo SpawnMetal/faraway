@@ -5,6 +5,7 @@ import {peopleModel} from '@models'
 import {IPeople} from 'swapi-ts'
 import {sw} from '@stores'
 import * as style from './style'
+import {getDate} from '@helpers'
 
 interface Props {
   parameter: keyof IPeople
@@ -27,6 +28,10 @@ export const PeopleInfo = observer((props: Props) => {
   const vehiclesStatusError = sw.isRequestStatusError('vehicles')
 
   useEffect(() => {
+    setValue(String(sw.value[parameter]))
+  }, [sw.value[parameter]])
+
+  useEffect(() => {
     switch (parameter) {
       case 'homeworld':
         setLoading(true)
@@ -44,10 +49,10 @@ export const PeopleInfo = observer((props: Props) => {
         setLoading(true)
         break
       case 'created':
-        setValue(new Date(value).toLocaleString())
+        setValue(getDate(value))
         break
       case 'edited':
-        setValue(new Date(value).toLocaleString())
+        setValue(getDate(value))
         break
     }
   }, [])
@@ -120,6 +125,9 @@ export const PeopleInfo = observer((props: Props) => {
     }
   }, [homeworldStatusError, filmsStatusError, speciesStatusError, starshipsStatusError, vehiclesStatusError])
 
+  // @ts-ignore
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => (sw.newValue[parameter] = event.target.value)
+
   return (
     <>
       <Grid item xs={3}>
@@ -129,7 +137,7 @@ export const PeopleInfo = observer((props: Props) => {
         {loading ? (
           <CircularProgress size={20} />
         ) : editMode && peopleModel[parameter].edit !== false ? (
-          <TextField id="standard-basic" defaultValue={value} fullWidth variant="standard" />
+          <TextField id="standard-basic" defaultValue={value} fullWidth variant="standard" onInput={handleInput} />
         ) : (
           <Typography>{value}</Typography>
         )}
