@@ -9,6 +9,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import * as style from './style'
 import {sw} from '@stores'
 import {getSw} from '@api'
+import {Link} from '@mui/material'
 
 export const Header = observer(() => {
   const handleOnKeyUp = (searchString: string) => {
@@ -22,9 +23,11 @@ export const Header = observer(() => {
     <Box>
       <AppBar position="fixed" sx={style.appBar}>
         <Toolbar>
-          <Typography variant="h6" noWrap component="div" sx={style.title}>
-            Faraway - Star Wars API
-          </Typography>
+          <Link href="/" underline="none" color="inherit">
+            <Typography variant="h6" noWrap component="div" sx={style.title}>
+              Faraway - Star Wars API
+            </Typography>
+          </Link>
           <Box sx={style.searchStyles}>
             <Box sx={style.searchIconWrapper}>
               <SearchIcon />
