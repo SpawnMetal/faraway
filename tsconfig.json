@@ -20,7 +20,7 @@
     "noFallthroughCasesInSwitch": false,
     "jsx": "react",
     "allowJs": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "paths": {
       "@components": ["client/components"],
       "@api": ["client/api"],
