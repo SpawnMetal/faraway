@@ -8,15 +8,11 @@ import InputBase from '@mui/material/InputBase'
 import SearchIcon from '@mui/icons-material/Search'
 import * as style from './style'
 import {sw} from '@stores'
-import {getSw} from '@api'
 import {Link} from '@mui/material'
 
 export const Header = observer(() => {
   const handleOnKeyUp = (searchString: string) => {
-    sw.setRequestStatusLoading('people')
-    getSw(searchString)
-      .then(() => sw.setRequestStatusSuccess('people'))
-      .catch(() => sw.setRequestStatusError('people'))
+    sw.getSwSearch(searchString)
   }
 
   return (

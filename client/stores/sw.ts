@@ -1,5 +1,6 @@
 import {makeAutoObservable} from 'mobx'
 import {IPeople, Resource} from 'swapi-ts'
+import {getSw} from '@api'
 
 type RequestStatuses = 'loading' | 'success' | 'error' | null
 
@@ -67,6 +68,52 @@ class Sw {
   updateValue() {
     for (const key in this.newValue) if (!this.newValue[key].length) this.newValue[key] = 'unknown'
     this.value = {...this.value, ...this.newValue}
+  }
+
+  setSwResult(result) {
+    this.peoples = result
+    this.peoples.resources.sort((a, b) => a.value.name.localeCompare(b.value.name))
+  }
+
+  getSwApp() {
+    this.setRequestStatusLoading('app')
+    this.setRequestStatusLoading('people')
+    getSw()
+      .then(result => {
+        this.setSwResult(result)
+        this.setRequestStatusSuccess('people')
+        this.setRequestStatusSuccess('app')
+      })
+      .catch(() => {
+        this.setRequestStatusError('people')
+        this.setRequestStatusError('app')
+      })
+  }
+
+  getSwSearch(searchString: string) {
+    this.setRequestStatusLoading('people')
+    getSw(searchString)
+      .then(result => {
+        this.setRequestStatusSuccess('people')
+        this.setSwResult(result)
+      })
+      .catch(() => this.setRequestStatusError('people'))
+  }
+
+  populate(path: PathTypes, index: number) {
+    this.setRequestStatusLoading(path)
+    this.peoples.resources[index]
+      .populate(path)
+      .then(() => this.setRequestStatusSuccess(path))
+      .catch(() => this.setRequestStatusError(path))
+  }
+
+  populateAll(index: number) {
+    this.populate('films', index)
+    this.populate('homeworld', index)
+    this.populate('species', index)
+    this.populate('starships', index)
+    this.populate('vehicles', index)
   }
 }
 

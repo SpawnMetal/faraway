@@ -5,7 +5,6 @@ import * as style from './style'
 import {sw} from '@stores'
 import {InfiniteScroll, PeopleDialog} from '@components'
 import {IPeople} from 'swapi-ts'
-import {populateAll} from '@api'
 import {useNavigate} from 'react-router-dom'
 
 export const Peoples = observer(() => {
@@ -29,7 +28,7 @@ export const Peoples = observer(() => {
       if (value) {
         sw.value = value
         sw.newValue = {}
-        populateAll(index)
+        sw.populateAll(index)
         setOpen(true)
       }
     }
@@ -38,7 +37,7 @@ export const Peoples = observer(() => {
   const handleClickOpen = (value: IPeople, index: number) => {
     sw.value = value
     sw.newValue = {}
-    populateAll(index)
+    sw.populateAll(index)
     setOpen(true)
     navigate(`?people=${value.name}`)
   }
