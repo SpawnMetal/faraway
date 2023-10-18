@@ -44,6 +44,7 @@ export const Peoples = observer(() => {
 
   const handleClose = () => {
     setOpen(false)
+    navigate(`/`)
   }
 
   const renderItem = ({value}, index) => {

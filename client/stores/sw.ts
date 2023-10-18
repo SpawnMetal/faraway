@@ -70,11 +70,13 @@ class Sw {
     this.value = {...this.value, ...this.newValue}
   }
 
+  // Заполняет данные в состояние
   setSwResult(result) {
     this.peoples = result
     this.peoples.resources.sort((a, b) => a.value.name.localeCompare(b.value.name))
   }
 
+  // Получает основные данные
   getSwApp() {
     this.setRequestStatusLoading('app')
     this.setRequestStatusLoading('people')
@@ -90,6 +92,7 @@ class Sw {
       })
   }
 
+  // Заполнение данных результатами поиска
   getSwSearch(searchString: string) {
     this.setRequestStatusLoading('people')
     getSw(searchString)
@@ -100,7 +103,10 @@ class Sw {
       .catch(() => this.setRequestStatusError('people'))
   }
 
+  // Заполнение конкретных дополнительных данных
   populate(path: PathTypes, index: number) {
+    if ((typeof this.peoples.resources[index].value[path][0] !== 'string' && this.peoples.resources[index].value[path][0] !== undefined) || this.peoples.resources[index].value[path]?.name) return
+
     this.setRequestStatusLoading(path)
     this.peoples.resources[index]
       .populate(path)
@@ -108,6 +114,7 @@ class Sw {
       .catch(() => this.setRequestStatusError(path))
   }
 
+  // Заполнение всех дополнительных данных
   populateAll(index: number) {
     this.populate('films', index)
     this.populate('homeworld', index)
