@@ -1,5 +1,5 @@
 import {makeAutoObservable} from 'mobx'
-import {IPeople, Resource} from 'swapi-ts'
+import {IPeople, Resource} from '@utils'
 import {getSw} from '@api'
 
 type RequestStatuses = 'loading' | 'success' | 'error' | null

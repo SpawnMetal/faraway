@@ -27,6 +27,7 @@
       "@stores": ["client/stores"],
       "@models": ["client/models"],
       "@helpers": ["client/helpers"],
+      "@utils": ["utils"],
       "@root/*": ["*"]
     },
     "noEmit": false,

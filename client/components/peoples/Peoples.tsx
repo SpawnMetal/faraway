@@ -4,7 +4,7 @@ import {observer} from 'mobx-react-lite'
 import * as style from './style'
 import {sw} from '@stores'
 import {InfiniteScroll, PeopleDialog} from '@components'
-import {IPeople} from 'swapi-ts'
+import {IPeople} from '@utils'
 import {useNavigate} from 'react-router-dom'
 
 export const Peoples = observer(() => {

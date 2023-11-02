@@ -1,4 +1,4 @@
-import {IPeople} from 'swapi-ts'
+import {IPeople} from '@utils'
 
 interface PeopleInterface {
   title: string
