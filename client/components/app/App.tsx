@@ -6,8 +6,14 @@ import {ErrorBoundary} from '@components'
 import {BrowserRouter} from 'react-router-dom'
 
 export const App = observer(() => {
+  let isGetted = false
+
   useEffect(() => {
-    sw.getSwApp()
+    !isGetted && sw.getSwApp()
+
+    return () => {
+      isGetted = true
+    }
   }, [])
 
   if (sw.isRequestStatusError('people')) return <ErrorPage />
