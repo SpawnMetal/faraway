@@ -1,1 +1,1 @@
-export * from './Sw'
+export * from './sw'
