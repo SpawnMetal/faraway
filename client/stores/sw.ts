@@ -8,6 +8,10 @@ export type PathTypes = 'app' | 'people' | 'films' | 'homeworld' | 'species' | '
 
 interface RequestStatusInterface extends Record<PathTypes, RequestStatuses> {}
 
+interface PeopleOriginalNamesInterface {
+  [key: string]: string
+}
+
 // Основное состояние приложения
 class Sw {
   requestStatusLoading: RequestStatuses = 'loading' // Статус получения данных с сервера - загрузка
@@ -30,6 +34,7 @@ class Sw {
   value: IPeople
   newValue: Partial<IPeople>
   peopleUrlName: string = ''
+  peopleOriginalNames: PeopleOriginalNamesInterface = {}
 
   constructor() {
     makeAutoObservable(this)
@@ -67,7 +72,10 @@ class Sw {
 
   // Обновляет значения на новые
   updateValue() {
-    for (const key in this.newValue) if (!this.newValue[key].length) this.newValue[key] = 'unknown'
+    for (const key in this.newValue) {
+      if (!this.newValue[key].length) this.newValue[key] = 'unknown'
+      key === 'name' && this.peopleChangeName(this.value[key], this.newValue[key])
+    }
     this.value = {...this.value, ...this.newValue}
   }
 
@@ -86,6 +94,7 @@ class Sw {
         this.setSwResult(result)
         this.setRequestStatusSuccess('app')
         this.setRequestStatusSuccess('people')
+        this.fillPeopleOriginalNames()
       })
       .catch(() => {
         this.setRequestStatusError('app')
@@ -102,6 +111,7 @@ class Sw {
         isAppLoading && this.setRequestStatusSuccess('app')
         this.setRequestStatusSuccess('people')
         this.setSwResult(result)
+        isAppLoading && this.fillPeopleOriginalNames()
       })
       .catch(() => {
         isAppLoading && this.setRequestStatusError('app')
@@ -127,6 +137,25 @@ class Sw {
     this.populate('species', index)
     this.populate('starships', index)
     this.populate('vehicles', index)
+  }
+
+  // Запоминает оригинальные имена персонажей
+  fillPeopleOriginalNames() {
+    for (const {value} of this.peoples.resources) this.peopleOriginalNames[value.name] = value.name
+  }
+
+  // Смена имени персонажу
+  peopleChangeName(oldName: string, newName: string) {
+    for (const key in this.peopleOriginalNames)
+      if (this.peopleOriginalNames[key] === oldName) {
+        this.peopleOriginalNames[key] = newName
+        break
+      }
+  }
+
+  // Поиск оригинального имени персонажа
+  peopleFindOriginalName() {
+    for (const key in this.peopleOriginalNames) if (this.peopleOriginalNames[key] === this.value.name) return key
   }
 }
 

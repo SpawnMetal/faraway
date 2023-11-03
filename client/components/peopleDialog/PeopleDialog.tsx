@@ -46,7 +46,7 @@ export const PeopleDialog = observer((props: Props) => {
       </IconButton>
       <DialogContent>
         <Grid container rowSpacing={1}>
-          <img style={style.img} src={`/peoples/${sw.value.name}.jpeg?w=248&fit=crop&auto=format`} alt={sw.value.name} loading="lazy" />
+          <img style={style.img} src={`/peoples/${sw.peopleFindOriginalName()}.jpeg?w=248&fit=crop&auto=format`} alt={sw.peopleFindOriginalName()} loading="lazy" />
           <PeopleInfo parameter="name" editMode={editMode} />
           <PeopleInfo parameter="homeworld" editMode={editMode} />
           <PeopleInfo parameter="birth_year" editMode={editMode} />
