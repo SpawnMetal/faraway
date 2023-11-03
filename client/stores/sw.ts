@@ -29,6 +29,7 @@ class Sw {
   }
   value: IPeople
   newValue: Partial<IPeople>
+  peopleUrlName: string = ''
 
   constructor() {
     makeAutoObservable(this)
@@ -83,24 +84,29 @@ class Sw {
     getSw()
       .then(result => {
         this.setSwResult(result)
-        this.setRequestStatusSuccess('people')
         this.setRequestStatusSuccess('app')
+        this.setRequestStatusSuccess('people')
       })
       .catch(() => {
-        this.setRequestStatusError('people')
         this.setRequestStatusError('app')
+        this.setRequestStatusError('people')
       })
   }
 
   // Заполнение данных результатами поиска
-  getSwSearch(searchString: string) {
+  getSwSearch(searchString: string, isAppLoading: boolean = false) {
+    isAppLoading && this.setRequestStatusLoading('app')
     this.setRequestStatusLoading('people')
     getSw(searchString)
       .then(result => {
+        isAppLoading && this.setRequestStatusSuccess('app')
         this.setRequestStatusSuccess('people')
         this.setSwResult(result)
       })
-      .catch(() => this.setRequestStatusError('people'))
+      .catch(() => {
+        isAppLoading && this.setRequestStatusError('app')
+        this.setRequestStatusError('people')
+      })
   }
 
   // Заполнение конкретных дополнительных данных

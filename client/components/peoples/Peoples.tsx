@@ -12,12 +12,10 @@ export const Peoples = observer(() => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const name = new URL(window.location.href).searchParams.get('people')
-
-    if (name) {
+    if (sw.peopleUrlName) {
       let index
       const value = sw.peoples.resources.find(({value}, i) => {
-        if (value.name === name) {
+        if (value.name === sw.peopleUrlName) {
           index = i
           return true
         }
@@ -45,6 +43,11 @@ export const Peoples = observer(() => {
   const handleClose = () => {
     setOpen(false)
     navigate(`/`)
+
+    if (sw.peopleUrlName) {
+      sw.peopleUrlName = ''
+      sw.getSwApp()
+    }
   }
 
   const renderItem = ({value}, index) => {
@@ -62,9 +65,11 @@ export const Peoples = observer(() => {
     </Typography>
   ) : (
     <>
-      <ImageList sx={style.imageList} cols={4} gap={0}>
-        <InfiniteScroll data={sw.peoples.resources} renderItem={renderItem} />
-      </ImageList>
+      {!sw.peopleUrlName && (
+        <ImageList sx={style.imageList} cols={4} gap={0}>
+          <InfiniteScroll data={sw.peoples.resources} renderItem={renderItem} />
+        </ImageList>
+      )}
       <PeopleDialog open={open} handleClose={handleClose} />
     </>
   )

@@ -9,7 +9,10 @@ export const App = observer(() => {
   let isGetted = false
 
   useEffect(() => {
-    !isGetted && sw.getSwApp()
+    sw.peopleUrlName = new URL(window.location.href).searchParams.get('people')
+
+    if (sw.peopleUrlName) !isGetted && sw.getSwSearch(sw.peopleUrlName, true)
+    else !isGetted && sw.getSwApp()
 
     return () => {
       isGetted = true
